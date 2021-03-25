@@ -16,10 +16,10 @@ public class VerifyImageDTO {
 
     private String verifyType;
 
-    private String verifyImgStr;
+    private byte[] verifyImg;
 
     /**
-     * 验证码真实 码/答案
+     * 验证码 结果
      */
     private String result;
 }

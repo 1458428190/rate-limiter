@@ -2,6 +2,7 @@ package org.gucha.ratelimiter.core.rule;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
+import org.gucha.ratelimiter.common.util.IpUtils;
 import org.gucha.ratelimiter.common.util.TimeUtils;
 import org.gucha.ratelimiter.core.config.RateLimiterProperties;
 import org.redisson.api.RAtomicLong;
@@ -50,7 +51,7 @@ public class IpRateLimiterRule extends AbstractRule {
      */
     @Override
     protected boolean doExecute(HttpServletRequest request, HttpServletResponse response) {
-        String ipAddress = getIpAddr(request);
+        String ipAddress = IpUtils.getRealIp(request);
         RateLimiterProperties.IpRule ipRule = properties.getIpRule();
         List<String> ignoreIpList = ipRule.getIgnoreIps();
         if (CollectionUtils.isNotEmpty(ignoreIpList)) {
@@ -99,7 +100,7 @@ public class IpRateLimiterRule extends AbstractRule {
      */
     @Override
     public boolean reset(HttpServletRequest request, String realRequestUrl) {
-        String ipAddress = getIpAddr(request);
+        String ipAddress = IpUtils.getRealIp(request);
         String requestUrl = realRequestUrl;
         // 重新计数
         int expirationTime = properties.getIpRule().getExpirationTime();
@@ -117,19 +118,5 @@ public class IpRateLimiterRule extends AbstractRule {
     @Override
     public int getOrder() {
         return 0;
-    }
-
-    private static String getIpAddr(HttpServletRequest request) {
-        String ip = request.getHeader("x-forwarded-for");
-        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-            ip = request.getHeader("Proxy-Client-IP");
-        }
-        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-            ip = request.getHeader("WL-Proxy-Client-IP");
-        }
-        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-            ip = request.getRemoteAddr();
-        }
-        return ip;
     }
 }

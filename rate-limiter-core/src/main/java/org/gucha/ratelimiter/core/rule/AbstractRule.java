@@ -8,10 +8,11 @@ import javax.servlet.http.HttpServletResponse;
  * @Author : laichengfeng
  * @Date : 2021/03/10 上午10:00
  */
-public abstract class AbstractRule implements RateLimiterRule{
+public abstract class AbstractRule implements RateLimiterRule {
 
     @Override
     public boolean execute(HttpServletRequest request, HttpServletResponse response) {
+        // 可以加些模板逻辑
         return doExecute(request, response);
     }
 

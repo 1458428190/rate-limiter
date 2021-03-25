@@ -8,8 +8,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * 没有redisson starter时才加载
- * @author chenjh
+ * TODO 替换成redis
+ * @author laichengfeng
  * @since 2019/7/17 8:21
  */
 @Configuration

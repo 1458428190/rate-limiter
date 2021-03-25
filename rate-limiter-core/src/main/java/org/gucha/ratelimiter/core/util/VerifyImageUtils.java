@@ -7,7 +7,6 @@ import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.ByteArrayOutputStream;
-import java.util.Base64;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
@@ -30,11 +29,9 @@ public class VerifyImageUtils {
     public VerifyImageDTO generateVerifyImg() {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         String result = CaptchaUtil.out(outputStream);
-        // 图片流, 可用于页面直接显示
-        String base64Image = "data:image/jpeg:base64," + Base64.getEncoder().encodeToString(outputStream.toByteArray());
         // 使用uuid做唯一验证id
         String verifyId = UUID.randomUUID().toString();
-        return new VerifyImageDTO(verifyId, null, base64Image, result);
+        return new VerifyImageDTO(verifyId, null, outputStream.toByteArray(), result);
     }
 
     /**

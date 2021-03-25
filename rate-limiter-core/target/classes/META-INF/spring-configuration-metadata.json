@@ -1,0 +1,37 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "org.gucha.ratelimiter.core.config.RateLimiterProperties",
+      "name": "rate-limiter",
+      "type": "org.gucha.ratelimiter.core.config.RateLimiterProperties"
+    },
+    {
+      "sourceType": "org.gucha.ratelimiter.core.config.RateLimiterProperties",
+      "name": "rate-limiter.ip-rule",
+      "type": "org.gucha.ratelimiter.core.config.RateLimiterProperties$IpRule"
+    }
+  ],
+  "properties": [
+    {
+      "sourceType": "org.gucha.ratelimiter.core.config.RateLimiterProperties",
+      "defaultValue": false,
+      "name": "rate-limiter.enabled",
+      "description": "是否启用限流",
+      "type": "java.lang.Boolean"
+    },
+    {
+      "sourceType": "org.gucha.ratelimiter.core.config.RateLimiterProperties",
+      "defaultValue": false,
+      "name": "rate-limiter.global-filter-mode",
+      "description": "是否启用全局拦截, 默认为false",
+      "type": "java.lang.Boolean"
+    },
+    {
+      "sourceType": "org.gucha.ratelimiter.core.config.RateLimiterProperties",
+      "name": "rate-limiter.urls",
+      "description": "非全局拦截下, 需要限流的接口列表",
+      "type": "java.util.List<java.lang.String>"
+    }
+  ]
+}

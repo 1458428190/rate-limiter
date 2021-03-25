@@ -1,9 +1,9 @@
 package org.gucha.ratelimiter.core.config;
 
 import lombok.Data;
-import org.gucha.ratelimiter.core.rule.IpRateLimiterRule;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -28,7 +28,7 @@ public class RateLimiterProperties {
     /**
      * 非全局拦截下, 需要限流的接口列表
      */
-    private List<String> urls;
+    private List<String> urls = new ArrayList<>();
 
     /**
      * 基于请求IP的限流规则

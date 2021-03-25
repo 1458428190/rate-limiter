@@ -17,5 +17,5 @@ public class VerifyImageVO {
 
     private String verifyType;
 
-    private String verifyImgStr;
+    private byte[] verifyImg;
 }
