@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * @Description:
+ * @Description: 限流器相关案例demo
  * @Author : laichengfeng
  * @Date : 2021/03/12 上午10:40
  */
