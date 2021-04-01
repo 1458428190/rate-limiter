@@ -9,7 +9,7 @@ import java.util.ServiceLoader;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * @Description:
+ * @Description: SPI 面向接口编程.便于扩展
  * @Author : laichengfeng
  * @Date : 2021/03/29 上午10:28
  */

@@ -1,6 +1,9 @@
 package org.gucha.ratelimiter.core.framework;
 
 import org.gucha.ratelimiter.common.exception.ConfigurationException;
+import org.gucha.ratelimiter.common.exception.InternalErrorException;
+import org.gucha.ratelimiter.common.exception.InvalidUrlException;
+import org.gucha.ratelimiter.common.exception.OverloadException;
 import org.gucha.ratelimiter.core.framework.interceptor.RateLimiterInterceptor;
 
 import java.util.List;
@@ -18,7 +21,7 @@ public interface UrlRateLimiter {
      * @param url
      * @throws ConfigurationException
      */
-    void limit(String appId, String url) throws ConfigurationException;
+    void limit(String appId, String url) throws InternalErrorException, OverloadException, InvalidUrlException;
 
     /**
      * add interceptor into the default interceptor chain. the interceptor will do some work

@@ -23,6 +23,11 @@ public interface PropertyConstants {
     String PROPERTY_RULE_CONFIG_SOURCE = PROPERTY_KEY_PREFIX + ".rule.config.source";
 
     /**
+     * 限流类型. 单机内存|分布式
+     */
+    String PROPERTY_TYPE = ".type";
+
+    /**
      * TODO 优化, 支持SpringBoot的自动注入
      */
     String PROPERTY_REDIS_ADDRESS = PROPERTY_KEY_PREFIX + ".redis.address";

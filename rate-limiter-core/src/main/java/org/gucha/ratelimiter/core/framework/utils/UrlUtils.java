@@ -1,8 +1,12 @@
 package org.gucha.ratelimiter.core.framework.utils;
 
+import jodd.util.StringUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.gucha.ratelimiter.common.exception.ConfigurationException;
+import org.gucha.ratelimiter.common.exception.InvalidUrlException;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -34,5 +38,22 @@ public class UrlUtils {
             }
         }
         return dirList;
+    }
+
+    public static String getUrlPath(String url) throws InvalidUrlException {
+        if(StringUtils.isBlank(url)) {
+            return null;
+        }
+        URI urlObject;
+        try {
+            urlObject = new URI(url);
+        } catch (URISyntaxException e) {
+            throw new InvalidUrlException("Get url path error: " + url, e);
+        }
+        String path = urlObject.getPath();
+        if(StringUtil.isEmpty(path)) {
+            return "/";
+        }
+        return path;
     }
 }

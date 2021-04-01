@@ -59,13 +59,18 @@ public class FixedTimeWindowRateLimiter implements RateLimiter {
         // 次数超过阈值,判断是否为一个有效时间窗口内
         try {
             if (lock.tryLock(TRY_LOCK_TIMEOUT, TimeUnit.MILLISECONDS)) {
-                // 运行时长已经超过1s
-                if (stopwatch.elapsed(TimeUnit.MILLISECONDS) > TimeUnit.SECONDS.toMillis(1)) {
-                    currentCount.set(0);
-                    stopwatch.reset();
+                try {
+                    // 运行时长已经超过1s
+                    if (stopwatch.elapsed(TimeUnit.MILLISECONDS) > TimeUnit.SECONDS.toMillis(1)) {
+                        currentCount.set(0);
+                        stopwatch.reset();
+                        stopwatch.start();
+                    }
+                    updatedCount = currentCount.incrementAndGet();
+                    return updatedCount <= limit;
+                } finally {
+                    lock.unlock();
                 }
-                updatedCount = currentCount.incrementAndGet();
-                return updatedCount <= limit;
             } else {
                 throw new InternalErrorException("tryAcquire() wait lock too long:" + TRY_LOCK_TIMEOUT + "ms");
             }

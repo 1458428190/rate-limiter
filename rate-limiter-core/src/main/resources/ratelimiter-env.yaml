@@ -1,0 +1,6 @@
+ratelimiter:
+  type: memory
+  rule:
+    config:
+      source: FILE
+      parser: YAML

@@ -92,5 +92,11 @@
             <artifactId>curator-recipes</artifactId>
             <version>4.2.0</version>
         </dependency>
+        <!-- SPI -->
+        <dependency>
+            <groupId>com.google.auto.service</groupId>
+            <artifactId>auto-service</artifactId>
+            <version>1.0-rc7</version>
+        </dependency>
     </dependencies>
 </project>

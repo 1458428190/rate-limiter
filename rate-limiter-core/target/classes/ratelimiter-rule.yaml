@@ -1,0 +1,5 @@
+configs:
+  - appId: app-1
+    limits:
+      - api: /rateLimit/demo
+        limit: 1

@@ -103,8 +103,7 @@ public class RateLimiterBeansFactory {
         if (rateLimitRule != null) {
             return rateLimitRule;
         }
-        rateLimitRule = new UrlRateLimitRule();
-        return rateLimitRule;
+        return new UrlRateLimitRule();
     }
 
 }

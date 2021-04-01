@@ -114,8 +114,7 @@ public class ZookeeperRuleConfigSource implements RuleConfigSource {
         }
         if (result != null && result.length > 0) {
             String configurationText = new String(result, UTF8);
-            UniformRuleConfigMapping uniformRuleConfigMapping = ruleConfigParser.parse(configurationText);
-            return uniformRuleConfigMapping;
+            return ruleConfigParser.parse(configurationText);
         }
         log.warn("configuration of zookeeper node path: {} is empty.", path);
         return null;
