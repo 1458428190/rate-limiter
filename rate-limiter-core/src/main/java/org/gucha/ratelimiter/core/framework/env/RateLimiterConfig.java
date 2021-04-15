@@ -27,6 +27,11 @@ public class RateLimiterConfig {
 
     private String ruleConfigSourceType = "file";
 
+    /**
+     * 规则配置文件
+     */
+    private String ruleConfigFile;
+
     private String type = "memory";
 
     private AtomicBoolean isInitialized = new AtomicBoolean(false);
@@ -82,6 +87,7 @@ public class RateLimiterConfig {
         if (StringUtils.isNotBlank(type)) {
             this.type = type;
         }
+        this.ruleConfigFile = propertySource.getPropertyStringValue(PropertyConstants.PROPERTY_RULE_CONFIG_FILE);
         redisConfig.buildFromProperties(propertySource);
         zookeeperConfig.buildFromProperties(propertySource);
     }

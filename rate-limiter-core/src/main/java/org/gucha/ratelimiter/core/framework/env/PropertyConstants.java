@@ -23,6 +23,11 @@ public interface PropertyConstants {
     String PROPERTY_RULE_CONFIG_SOURCE = PROPERTY_KEY_PREFIX + ".rule.config.source";
 
     /**
+     * 规则配置文件
+     */
+    String PROPERTY_RULE_CONFIG_FILE = PROPERTY_KEY_PREFIX + ".rule.config.file";
+
+    /**
      * 限流类型. 单机内存|分布式
      */
     String PROPERTY_TYPE = ".type";

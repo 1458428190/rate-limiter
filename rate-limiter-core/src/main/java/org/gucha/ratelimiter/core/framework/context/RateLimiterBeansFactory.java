@@ -52,19 +52,20 @@ public class RateLimiterBeansFactory {
     }
 
     public RuleConfigSource obtainRuleConfigSource(RuleConfigSource ruleConfigSource) {
+        RateLimiterConfig rateLimiterConfig = RateLimiterConfig.instance();
         if (ruleConfigSource == null) {
             ruleConfigSource = ExtensionLoader.getExtension(RuleConfigSource.class, false);
         }
         if (ruleConfigSource == null) {
-            String sourceType = RateLimiterConfig.instance().getRuleConfigSourceType();
+            String sourceType = rateLimiterConfig.getRuleConfigSourceType();
             if (sourceType.equals("zookeeper")) {
                 ruleConfigSource = new ZookeeperRuleConfigSource();
             } else if (sourceType.equals("file")) {
-                ruleConfigSource = new FileRuleConfigSource();
+                ruleConfigSource = new FileRuleConfigSource(rateLimiterConfig.getRuleConfigFile());
             }
         }
         if (ruleConfigSource == null) {
-            ruleConfigSource = new FileRuleConfigSource();
+            ruleConfigSource = new FileRuleConfigSource(rateLimiterConfig.getRuleConfigFile());
         }
         return ruleConfigSource;
     }

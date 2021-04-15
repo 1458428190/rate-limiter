@@ -77,6 +77,8 @@ public class DistributedUrlRateLimiter extends AbstractUrlRateLimiter {
         /* source type: file or zookeeper */
         private String ruleSourceType = "file";
 
+        private String ruleConfigFile;
+
         public DistributedUrlRateLimiterBuilder() {
         }
 
@@ -110,12 +112,17 @@ public class DistributedUrlRateLimiter extends AbstractUrlRateLimiter {
             return this;
         }
 
+        public DistributedUrlRateLimiterBuilder setRuleConfigFile(String ruleConfigFile) {
+            this.ruleConfigFile = ruleConfigFile;
+            return this;
+        }
+
         public DistributedUrlRateLimiter build() {
             // 初始化相关对象
             JedisTaskExecutor executor = new DefaultJedisTaskExecutor(redisConfig.getAddress(),
                     redisConfig.getTimeout(), redisConfig.getPoolConfig());
 
-            RuleConfigParser parser = null;
+            RuleConfigParser parser;
             if (this.ruleParserType.equals("yaml")) {
                 parser = new YamlRuleConfigParser();
             } else if (this.ruleParserType.equals("json")) {
@@ -124,9 +131,9 @@ public class DistributedUrlRateLimiter extends AbstractUrlRateLimiter {
                 throw new RuntimeException("Do not support the rule paser type: " + this.ruleParserType);
             }
 
-            RuleConfigSource source = null;
+            RuleConfigSource source;
             if (this.ruleSourceType.equals("file")) {
-                source = new FileRuleConfigSource();
+                source = new FileRuleConfigSource(ruleConfigFile);
             } else if (this.ruleSourceType.equals("zookeeper")) {
                 if (zookeeperConfig != null && StringUtils.isNoneBlank(zookeeperConfig.getAddress())
                         && StringUtils.isNoneBlank(zookeeperConfig.getPath())) {
